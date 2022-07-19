@@ -2,6 +2,7 @@ package com.et.backend.clientes.service.interfaces;
 
 import java.util.List;
 
+//import com.et.backend.clientes.dto.ClienteDto;
 import com.et.backend.clientes.entities.Cliente;
 import org.springframework.http.ResponseEntity;
 
@@ -22,5 +23,19 @@ public interface IClienteInterface {
 	
 	// actualizar todo el objeto 
 	public Cliente actualizarCliente( Cliente clienteNuevo );
+
+	public boolean existeClientePorId( Long id );
+
+
+
+	public Cliente buscarPorEmail( String email );
+
+
+
+
+
+	public Cliente buscarPorEmailQuery( String email );
+
+	public Cliente buscarPorPaterno( String apPaterno );
 
 }

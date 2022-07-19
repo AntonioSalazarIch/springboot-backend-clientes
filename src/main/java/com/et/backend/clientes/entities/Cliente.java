@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table( name = "clientes" )
@@ -19,23 +23,38 @@ public class Cliente implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@NotNull( message="El campo 'nombre' no debe ser nulo" )
+
+	@NotNull( message = "El campo 'nombre' no debe ser nulo" )
+	@NotBlank( message = "El campo 'nombre' no debe estar vacio" )
 	private String nombre;
-	@NotNull( message="El campo 'apellidoPaterno' no debe ser nulo" )
+
+	@NotBlank( message = "El campo 'apellidoPaterno' no debe estar vacio" )
 	@Column( name = "apellido_paterno" )
 	private String apellidoPaterno;
 
-	@NotNull( message="El campo 'apellidoMaterno' no debe ser nulo" )
+	//@NotNull( message="El campo 'apellidoMaterno' no debe ser nulo" )
+	@NotNull( message = "El campo 'apellidoMaterno' no debe ser nulo" )
 	@Column( name = "apellido_materno" )
 	private String apellidoMaterno;
 
-	//@Digits(message="Number should contain 10 digits.", fraction = 0, integer = 10)
-	@Pattern(regexp="^[0-9]+$", message="Solo se permiten numeros")
-	private String edad;
-
-	private Long numero;
 	private String ci;
-	
+
+	@Pattern( regexp="^[0-9]+$",
+			message="En el campo 'edad' solo se permiten numeros" )
+	private String edad;
+	private Long numero;
+
+	@Email
+	@Column( name = "email", unique = true )
+	private String email;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Long getId() {
 		return id;
 	}

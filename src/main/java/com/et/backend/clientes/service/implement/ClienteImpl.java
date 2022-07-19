@@ -62,11 +62,34 @@ public class ClienteImpl implements IClienteInterface {
 		clienteActual.setApellidoMaterno(clienteNuevo.getApellidoMaterno());
 		clienteActual.setNombre(clienteNuevo.getNombre());
 		clienteActual.setCi(clienteNuevo.getCi());
+		clienteActual.setEmail( clienteNuevo.getEmail() );
+		clienteActual.setNumero( clienteNuevo.getNumero());
+		clienteActual.setEdad( clienteNuevo.getEdad() );
 		
 		clienteDao.save(clienteActual);
 		return clienteActual;
 		
 	}
 
-	
+	@Override
+	public boolean existeClientePorId(Long id) {
+		return clienteDao.existsById( id );
+	}
+
+	@Override
+	public Cliente buscarPorEmail(String email) {
+		return clienteDao.buscarPorEmailQueryNativo( email );
+	}
+
+	@Override
+	public Cliente buscarPorEmailQuery(String email) {
+		return clienteDao.buscarPorEmailQuery( email );
+	}
+
+	@Override
+	public Cliente buscarPorPaterno( String apPaterno ) {
+		return clienteDao.findByApellidoPaterno( apPaterno );
+	}
+
+
 }
